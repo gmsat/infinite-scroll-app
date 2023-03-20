@@ -1,7 +1,8 @@
 import TestButton from "./components/common/TestButton";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFetch } from "./hooks/useFetch";
 import { PhotosCuratedList } from "./components";
+import { FavoritesModal } from "./components";
 
 function App() {
 
@@ -14,10 +15,19 @@ function App() {
   // TODO: feature to add photo to favorites or remove from the list of favorites
   // TODO: save favorites to local storage so data stays after refresh
 
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setModalOpen((prevState) => !prevState);
+    console.log("modal open", modalOpen);
+  }
+
   return (
-    <div>
+    <>
+      <button onClick={handleModalOpen}>Favorites</button>
+      <FavoritesModal open={modalOpen}/>
       <PhotosCuratedList/>
-    </div>
+    </>
   );
 }
 
