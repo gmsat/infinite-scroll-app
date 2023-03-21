@@ -6,11 +6,17 @@ import { Flex } from "../Layout/Flex";
 export const ModalBox = styled('div')({
   position: "relative",
   backgroundColor: "white",
-  width: "80%",
-  height: "80%",
+  width: "70%",
+  height: "90%",
   margin: "auto",
   border: "solid darkgrey 1px",
-  borderRadius: "12px"
+  borderRadius: "12px",
+  overflowY: "clip"
+});
+
+const ModalContent = styled('div')({
+  overflowY: "auto",
+  height: "93%"
 });
 
 export const ModalContainer = styled('div')({
@@ -47,6 +53,13 @@ const ModalDivider = styled('div')({
   width: "100%",
   borderTop: "solid 1px #dadada",
   backgroundColor: "#dadada"
+});
+
+const ModalTitle = styled('text')({
+  fontSize: "2rem",
+  fontWeight: "bold",
+  flex: 1,
+  marginLeft: 20
 })
 
 const CloseModalButton = ({onClick}: {onClick: MouseEventHandler<HTMLDivElement>}) => {
@@ -58,20 +71,24 @@ const CloseModalButton = ({onClick}: {onClick: MouseEventHandler<HTMLDivElement>
 interface ModalProps {
   children?: ReactNode,
   onClose: MouseEventHandler<HTMLDivElement>,
-  open: boolean
+  open: boolean,
+  title?: string
 }
 
-const Modal: React.FC<ModalProps> = ({children, onClose, open}) => {
+const Modal: React.FC<ModalProps> = ({children, onClose, open, title}) => {
   function renderModal() {
     return (
       <>
         <ModalContainer>
           <ModalBox>
             <Flex style={{justifyContent: "flex-end", padding: 4}}>
+              <ModalTitle>{title}</ModalTitle>
               <CloseModalButton onClick={onClose}/>
             </Flex>
             <ModalDivider/>
-            {children}
+            <ModalContent>
+              {children}
+            </ModalContent>
           </ModalBox>
         </ModalContainer>
       </>

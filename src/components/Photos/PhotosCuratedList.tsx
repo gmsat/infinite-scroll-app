@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useFetch } from "../../hooks/useFetch";
-import { PhotoItem } from "../index";
+import { FavoritePhotoItem } from "../index";
 import styled from "@emotion/styled";
 
 export type PhotoSrc = {
@@ -98,6 +98,23 @@ const PhotosCuratedList = () => {
 
   const elementRef = useRef(null);
 
+  async function fetchMoreItems() {
+    setLoading2(true);
+
+    if (!nextPage) {
+      setLoading2(false);
+      return;
+    }
+
+    if (nextPage) {
+      const res = await fetch(nextPage, options);
+      const json: CuratedPhotosData = await res.json();
+      setPhotosData((prevPhotos) => [...prevPhotos, ...json.photos]);
+      setNextPage(json.next_page);
+      setLoading2(false);
+    }
+  }
+
   function onIntersection(entries: any[]) {
     const firstEntry = entries[0];
 
@@ -132,23 +149,6 @@ const PhotosCuratedList = () => {
     }
   }, [data]);
 
-  async function fetchMoreItems() {
-    setLoading2(true);
-
-    if (!nextPage) {
-      setLoading2(false);
-      return;
-    }
-
-    if (nextPage) {
-      const res = await fetch(nextPage, options);
-      const json: CuratedPhotosData = await res.json();
-      setPhotosData((prevPhotos) => [...prevPhotos, ...json.photos]);
-      setNextPage(json.next_page);
-      setLoading2(false);
-    }
-  }
-
   // if (loading && !photosData) {
   //   return <div>...loading ...loading ...loading</div>;
   // }
@@ -164,7 +164,7 @@ const PhotosCuratedList = () => {
   return (
     <PhotosContainer>
       {photosData.map((photo, index) => (
-        <PhotoItem photo={photo} key={index} />
+        <FavoritePhotoItem photo={photo} key={index} />
       ))}
       {loading2 && <div>...loading ...loading ...loading</div>}
       <div ref={elementRef}></div>

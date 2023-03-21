@@ -2,9 +2,10 @@ import React, { MouseEventHandler, useEffect, useState } from 'react';
 import styled from "@emotion/styled";
 import { useFavorites } from "../../hooks/useFavorites";
 import { Photo } from "../Photos/PhotosCuratedList";
-import { PhotoItem } from "../index";
+import { FavoritePhotoItem } from "../index";
 import { ModalPhotoItem } from "../index";
 import Modal from "../common/Modal/Modal";
+import { Flex } from "../index";
 
 const photoItem = {
   "id": 2880507,
@@ -29,6 +30,12 @@ const photoItem = {
   "alt": "Brown Rocks During Golden Hour"
 }
 
+const BigText = styled('div')({
+  fontFamily: "monospace",
+  fontSize: "3.4rem",
+  textAlign: "center"
+});
+
 const FavoritesModal = ({open, onClose}: {open: boolean, onClose: MouseEventHandler<HTMLDivElement>}) => {
   const {getFavorites, clearFavorites, addToFavorites, removeFromFavoritesById, setAllFavoritePhotos} = useFavorites();
   const [favorites, setFavorites] = useState<Photo[]>(getFavorites());
@@ -48,6 +55,24 @@ const FavoritesModal = ({open, onClose}: {open: boolean, onClose: MouseEventHand
     clearFavorites();
   }
 
+  function renderFavorites() {
+    return (
+      <Flex gap={20}>
+        {favorites.map((p, index) => (
+          <ModalPhotoItem key={index} photo={p} removePhotoItem={() => removeFromFavorites(p)}/>
+        ))}
+      </Flex>
+    )
+  }
+
+  function renderIfFavoritesEmpty() {
+    return (
+      <div style={{height: "70vh", maxHeight: "70vh", display: "flex", justifyContent: "center", alignItems: "center", margin: "auto"}}>
+        <BigText>No favorites saved!</BigText>
+      </div>
+    )
+  }
+
   useEffect(() => {
     const items = getFavorites();
 
@@ -57,11 +82,12 @@ const FavoritesModal = ({open, onClose}: {open: boolean, onClose: MouseEventHand
   }, [open]);
 
   return (
-    <Modal onClose={onClose} open={open}>
-      <div style={{display: "flex", flexWrap: "wrap", gap: 10, border: "solid black 1px", padding: 12}}>
-        {favorites.map((p, index) => (
-          <ModalPhotoItem photo={p} handleRemoveFromFavorites={() => removeFromFavorites(p)}/>
-        ))}
+    <Modal onClose={onClose} open={open} title={"Favorites"}>
+      <div style={{display: "flex", flexWrap: "wrap", gap: 10, padding: 12}}>
+        {favorites.length > 0
+          ? renderFavorites()
+          : renderIfFavoritesEmpty()
+        }
       </div>
     </Modal>
   );
