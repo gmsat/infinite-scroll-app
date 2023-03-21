@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { MouseEventHandler, useEffect, useState } from 'react';
 import styled from "@emotion/styled";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useFavorites } from "../../hooks/useFavorites";
 import { Photo } from "../Photos/PhotosCuratedList";
+import { PhotoItem } from "../index";
+import { ModalPhotoItem } from "../index";
+import Modal from "../common/Modal/Modal";
 
 const photoItem = {
   "id": 2880507,
@@ -27,34 +29,39 @@ const photoItem = {
   "alt": "Brown Rocks During Golden Hour"
 }
 
-const FavoritesModal = ({open}: {open: boolean}) => {
-  const {getFavorites, clearFavorites, addToFavorites, removeFromFavoritesById} = useFavorites();
-  const [favorites, setFavorites] = useState<Photo[]>([]);
+const FavoritesModal = ({open, onClose}: {open: boolean, onClose: MouseEventHandler<HTMLDivElement>}) => {
+  const {getFavorites, clearFavorites, addToFavorites, removeFromFavoritesById, setAllFavoritePhotos} = useFavorites();
+  const [favorites, setFavorites] = useState<Photo[]>(getFavorites());
 
-  const Modal = styled.div({
-    zIndex: 100,
-    width: "60%",
-    height: "80%",
-    position: "absolute",
-    backgroundColor: "white",
-    border: "solid black 1px",
-    padding: 12,
-    visibility: open ? "visible" : "hidden"
-  });
+  const removeFromFavorites = (photo: Photo) => {
+    const p = favorites.find((p) => p.id === photo.id);
 
-  // show local storage items
+    if (p) {
+      const filtered = favorites.filter((p) => p.id !== photo.id);
+      setFavorites(filtered);
+      setAllFavoritePhotos(filtered);
+    }
+  }
+
+  const clearFavoritePhotos = () => {
+    setFavorites([]);
+    clearFavorites();
+  }
+
   useEffect(() => {
     const items = getFavorites();
+
     if (items) {
       setFavorites(items);
     }
-  }, []);
+  }, [open]);
 
   return (
-    <Modal>
-      <button onClick={clearFavorites}>Clear local storage</button>
+    <Modal onClose={onClose} open={open}>
       <div style={{display: "flex", flexWrap: "wrap", gap: 10, border: "solid black 1px", padding: 12}}>
-        {JSON.stringify(favorites)}
+        {favorites.map((p, index) => (
+          <ModalPhotoItem photo={p} handleRemoveFromFavorites={() => removeFromFavorites(p)}/>
+        ))}
       </div>
     </Modal>
   );

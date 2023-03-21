@@ -1,6 +1,8 @@
 import { Photo } from "../components/Photos/PhotosCuratedList";
+import { useState } from "react";
 
 export const useFavorites = () => {
+  const [favoritesStorage, setFavoritesStorage] = useState<Photo[]>([]);
 
   const getFavorites = (): Photo[] => {
     const favoritesJson = localStorage.getItem('favorites');
@@ -23,7 +25,6 @@ export const useFavorites = () => {
     return false;
   }
 
-  // TODO: check if item already exists in favorites, don't add the item to favorites if it's already there
   const addToFavorites = (photo: Photo) => {
     const favorites = getFavorites();
     favorites.push(photo);
@@ -31,28 +32,6 @@ export const useFavorites = () => {
   }
 
   // TODO: get specific item by id to remove from favorites
-  // const removeFromFavorites = (photo: Photo) => {
-  //   const favorites = getFavorites();
-  //
-  //   const index = favorites.findIndex(f => f.id === photo.id);
-  //
-  //   if (index !== -1) {
-  //     favorites.splice(index, 1);
-  //     localStorage.setItem('favorites', JSON.stringify(favorites));
-  //   }
-  // }
-
-  // const removeFromFavorites = (photo: Photo) => {
-  //   const favorites = getFavorites();
-  //
-  //   const index = favorites.findIndex(f => f.id === photo.id);
-  //
-  //   if (index !== -1) {
-  //     favorites.splice(index, 1);
-  //     localStorage.setItem('favorites', JSON.stringify(favorites));
-  //   }
-  // }
-
   const removeFromFavoritesById = (photo: Photo) => {
     const favorites = getFavorites();
     const photoExists = favorites.find((p) => p.id === photo.id);
@@ -67,5 +46,16 @@ export const useFavorites = () => {
     localStorage.removeItem('favorites');
   }
 
-  return {getFavorites, addToFavorites, clearFavorites, photoInFavorites, removeFromFavoritesById}
+  const setAllFavoritePhotos = (photos: Photo[]) => {
+    localStorage.setItem('favorites', JSON.stringify(photos));
+  }
+
+  return {
+    getFavorites,
+    addToFavorites,
+    clearFavorites,
+    photoInFavorites,
+    removeFromFavoritesById,
+    setAllFavoritePhotos,
+    favoritesStorage}
 }

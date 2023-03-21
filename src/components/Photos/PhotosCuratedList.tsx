@@ -1,8 +1,7 @@
-import React, { RefObject, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useFetch } from "../../hooks/useFetch";
 import { PhotoItem } from "../index";
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
-import photoItem from "./PhotoItem";
+import styled from "@emotion/styled";
 
 export type PhotoSrc = {
   original: string,
@@ -66,9 +65,19 @@ const example = {
   "next_page": "https://api.pexels.com/v1/curated/?page=2&per_page=1"
 }
 
+const PhotosContainer = styled.div({
+  display: "flex",
+  margin: "auto",
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  flexWrap: "wrap",
+  gap: 36
+});
+
 const PhotosCuratedList = () => {
   const API_KEY = import.meta.env.VITE_PEXELS_API_KEY;
-  const url = "https://api.pexels.com/v1/curated?per_page=15";
+  const url = "https://api.pexels.com/v1/curated?per_page=12";
 
   const options = {
     headers: {
@@ -138,50 +147,7 @@ const PhotosCuratedList = () => {
       setNextPage(json.next_page);
       setLoading2(false);
     }
-
   }
-
-  // const loadNextPage = async () => {
-  //   console.log("loading more photos");
-  //   if (nextPage) {
-  //     try {
-  //       setLoading2(true);
-  //
-  //       const response = await fetch(nextPage, options);
-  //       const newData: CuratedPhotosData = await response.json();
-  //
-  //       setPhotosData((prevState) => [...prevState, ...newData?.photos]);
-  //       setNextPage(newData?.next_page);
-  //     } catch (e) {
-  //       console.log(e);
-  //     } finally {
-  //       setLoading2(false);
-  //     }
-  //   }
-  // };
-  //
-  // useEffect(() => {
-  //   if (data) {
-  //     setPhotosData(data.photos);
-  //     setNextPage(data.next_page);
-  //   }
-  // }, [data]);
-  //
-  // const loadMoreRef = useRef<HTMLDivElement>(null);
-  // // @ts-ignore
-  // const [isIntersecting, ref]  = useIntersectionObserver({
-  //   root: loadMoreRef.current ? loadMoreRef.current : undefined,
-  //   rootMargin: "0px",
-  //   threshold: 0.1});
-  //
-  // useEffect(() => {
-  //   if (isIntersecting) {
-  //     console.log("console logs")
-  //     console.log(isIntersecting);
-  //     console.log(ref);
-  //     loadNextPage();
-  //   }
-  // }, [isIntersecting]);
 
   // if (loading && !photosData) {
   //   return <div>...loading ...loading ...loading</div>;
@@ -196,15 +162,13 @@ const PhotosCuratedList = () => {
   // }
 
   return (
-    <div
-      style={{ display: "flex", flexDirection: "row", gap: "10px", flexWrap: "wrap" }}
-    >
+    <PhotosContainer>
       {photosData.map((photo, index) => (
         <PhotoItem photo={photo} key={index} />
       ))}
       {loading2 && <div>...loading ...loading ...loading</div>}
-      <div ref={elementRef}>Loading more photos...</div>
-    </div>
+      <div ref={elementRef}></div>
+    </PhotosContainer>
   );
 };
 
