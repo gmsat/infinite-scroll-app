@@ -2,10 +2,11 @@ import React, { MouseEventHandler, useEffect, useState } from 'react';
 import styled from "@emotion/styled";
 import { useFavorites } from "../../hooks/useFavorites";
 import { Photo } from "../Photos/PhotosCuratedList";
-import { FavoritePhotoItem } from "../index";
+import { PhotoItem } from "../index";
 import { ModalPhotoItem } from "../index";
 import Modal from "../common/Modal/Modal";
 import { Flex } from "../index";
+import { Fade } from "../common/Transitions/Fade";
 
 const photoItem = {
   "id": 2880507,
@@ -37,8 +38,8 @@ const BigText = styled('div')({
 });
 
 const FavoritesModal = ({open, onClose}: {open: boolean, onClose: MouseEventHandler<HTMLDivElement>}) => {
-  const {getFavorites, clearFavorites, addToFavorites, removeFromFavoritesById, setAllFavoritePhotos} = useFavorites();
-  const [favorites, setFavorites] = useState<Photo[]>(getFavorites());
+  const {getFavorites, clearFavorites, setAllFavoriteKeyItems} = useFavorites<Photo>('favorites');
+  const [favorites, setFavorites] = useState(getFavorites());
 
   const removeFromFavorites = (photo: Photo) => {
     const p = favorites.find((p) => p.id === photo.id);
@@ -46,7 +47,7 @@ const FavoritesModal = ({open, onClose}: {open: boolean, onClose: MouseEventHand
     if (p) {
       const filtered = favorites.filter((p) => p.id !== photo.id);
       setFavorites(filtered);
-      setAllFavoritePhotos(filtered);
+      setAllFavoriteKeyItems(filtered);
     }
   }
 

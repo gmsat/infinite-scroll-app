@@ -1,12 +1,12 @@
 import PhotosCuratedList from "./Photos/PhotosCuratedList";
-import FavoritePhotoItem from "./Photos/FavoritePhotoItem";
+import PhotoItem from "./Photos/PhotoItem";
 import FavoritesModal from "./FavoritesModal/FavoritesModal";
 import ModalPhotoItem from "./FavoritesModal/ModalPhotoItem";
 import { Flex } from "./common/Layout/Flex";
 
 export {
   PhotosCuratedList,
-  FavoritePhotoItem,
+  PhotoItem,
   FavoritesModal,
   ModalPhotoItem,
   Flex

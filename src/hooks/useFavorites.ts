@@ -1,11 +1,6 @@
-import { Photo } from "../components/Photos/PhotosCuratedList";
-import { useState } from "react";
-
-export const useFavorites = () => {
-  const [favoritesStorage, setFavoritesStorage] = useState<Photo[]>([]);
-
-  const getFavorites = (): Photo[] => {
-    const favoritesJson = localStorage.getItem('favorites');
+export const useFavorites = <T extends {id: string | number}>(storageKey: string) => {
+  const getFavorites = (): T[] => {
+    const favoritesJson = localStorage.getItem(storageKey);
 
     if (favoritesJson) {
       return JSON.parse(favoritesJson);
@@ -14,9 +9,9 @@ export const useFavorites = () => {
     return [];
   }
 
-  const photoInFavorites = (photo: Photo): boolean => {
+  const itemInFavorites = (item: T): boolean => {
     const favorites = getFavorites();
-    const photoExists = favorites.find((p) => p.id === photo.id);
+    const photoExists = favorites.find((i) => i.id === item.id);
 
     if (photoExists) {
       return true;
@@ -25,37 +20,36 @@ export const useFavorites = () => {
     return false;
   }
 
-  const addToFavorites = (photo: Photo) => {
+  const addToFavorites = (item: T) => {
     const favorites = getFavorites();
-    favorites.push(photo);
-    localStorage.setItem('favorites', JSON.stringify(favorites));
+    favorites.push(item);
+    localStorage.setItem(storageKey, JSON.stringify(favorites));
   }
 
-  // TODO: get specific item by id to remove from favorites
-  const removeFromFavoritesById = (photo: Photo) => {
+  const removeFromFavoritesById = (item: T) => {
     const favorites = getFavorites();
-    const photoExists = favorites.find((p) => p.id === photo.id);
+    const photoExists = favorites.find((i) => i.id === item.id);
 
     if (photoExists) {
-      const filtered = favorites.filter((p) => p.id !== photo.id);
-      localStorage.setItem('favorites', JSON.stringify(filtered));
+      const filtered = favorites.filter((i) => i.id !== item.id);
+      localStorage.setItem(storageKey, JSON.stringify(filtered));
     }
   }
 
   const clearFavorites = () => {
-    localStorage.removeItem('favorites');
+    localStorage.removeItem(storageKey);
   }
 
-  const setAllFavoritePhotos = (photos: Photo[]) => {
-    localStorage.setItem('favorites', JSON.stringify(photos));
+  const setAllFavoriteKeyItems = (items: T[]) => {
+    localStorage.setItem(storageKey, JSON.stringify(items));
   }
 
   return {
     getFavorites,
     addToFavorites,
     clearFavorites,
-    photoInFavorites,
+    itemInFavorites,
     removeFromFavoritesById,
-    setAllFavoritePhotos,
-    favoritesStorage}
+    setAllFavoriteKeyItems
+  }
 }

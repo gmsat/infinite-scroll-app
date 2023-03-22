@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { FavoritesModal, PhotosCuratedList } from "./components";
+import { InfiniteScrollPhotos } from "./pages";
 import styled from "@emotion/styled";
 
 const AppContainer = styled('div')({
@@ -13,17 +12,9 @@ const AppContainer = styled('div')({
 });
 
 function App() {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const handleModalOpen = () => {
-    setModalOpen((prevState) => !prevState);
-  }
-
   return (
     <AppContainer>
-      <button onClick={handleModalOpen}>Favorites</button>
-      <FavoritesModal open={modalOpen} onClose={handleModalOpen}/>
-      <PhotosCuratedList/>
+      <InfiniteScrollPhotos/>
     </AppContainer>
   );
 }

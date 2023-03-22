@@ -3,6 +3,10 @@ import styled from "@emotion/styled";
 import { createPortal } from "react-dom";
 import { Flex } from "../Layout/Flex";
 
+interface ModalContainerProps {
+  backdropFilter?: string
+}
+
 export const ModalBox = styled('div')({
   position: "relative",
   backgroundColor: "white",
@@ -19,17 +23,19 @@ const ModalContent = styled('div')({
   height: "93%"
 });
 
-export const ModalContainer = styled('div')({
+export const ModalContainer = styled('div')<ModalContainerProps>({
   position: "fixed",
-  backgroundColor: "rgba(0,0,0,0.6)",
   height: "100%",
   width: "100%",
   top: 0,
   left: 0,
   display: "flex",
   justifyContent: "center",
-  alignItems: "center"
-});
+  alignItems: "center",
+  backdropFilter: "brightness(40%) blur(12px)"
+}, props => ({
+  backdropFilter: props.backdropFilter
+}));
 
 const CloseButton = styled('div')({
   fontSize: "3rem",
@@ -70,16 +76,17 @@ const CloseModalButton = ({onClick}: {onClick: MouseEventHandler<HTMLDivElement>
 
 interface ModalProps {
   children?: ReactNode,
-  onClose: MouseEventHandler<HTMLDivElement>,
+  title?: string,
+  backdropFilter?: string
   open: boolean,
-  title?: string
+  onClose: MouseEventHandler<HTMLDivElement>,
 }
 
-const Modal: React.FC<ModalProps> = ({children, onClose, open, title}) => {
+const Modal: React.FC<ModalProps> = ({children, onClose, open, title, backdropFilter}) => {
   function renderModal() {
     return (
       <>
-        <ModalContainer>
+        <ModalContainer backdropFilter={backdropFilter}>
           <ModalBox>
             <Flex style={{justifyContent: "flex-end", padding: 4}}>
               <ModalTitle>{title}</ModalTitle>

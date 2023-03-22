@@ -1,13 +1,24 @@
 import React from 'react';
 import styled from "@emotion/styled";
+import { theme } from "../../assets/themes/theme";
 
-export const ImageContainer = styled('div')({
+interface CardProps {
+  shadow?: "primary" | "secondary"
+}
+
+export const Card = styled('div')<CardProps>({
+  position: "relative"
+}, props => ({
+  boxShadow:
+    props.shadow === "primary" ? theme.shadows.primary :
+    props.shadow === "secondary" ? theme.shadows.secondary : "none"
+}));
+
+export const PhotoCard = styled(Card)({
   maxHeight: "300px",
   width: "400px",
-  position: "relative",
   overflow: "hidden",
-  borderRadius: "8px",
-  boxShadow: "3px 3px 0px 0px rgba(0,0,0,0.20)"
+  borderRadius: "8px"
 });
 
 export const Image = styled('img')({

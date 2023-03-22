@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useFetch } from "../../hooks/useFetch";
-import { FavoritePhotoItem } from "../index";
+import { PhotoItem } from "../index";
 import styled from "@emotion/styled";
+import { useInfinitePhotos } from "./useInfinitePhotos";
 
 export type PhotoSrc = {
   original: string,
@@ -28,10 +29,10 @@ export interface Photo {
   alt: string
 }
 
-export type CuratedPhotosData = {
+export type CuratedPhotosData<T> = {
   page: number,
   per_page: number,
-  photos: Photo[],
+  photos: Photo[] | T,
   next_page: string
 }
 
@@ -85,88 +86,27 @@ const PhotosCuratedList = () => {
     },
   };
 
-  const { data, loading, error } = useFetch<CuratedPhotosData>(
-    url,
-    options,
-    true,
-    true
-  );
+  const {photosData, loading, error, elementRef} = useInfinitePhotos<Photo>(url, options);
 
-  const [photosData, setPhotosData] = useState<Photo[]>([]);
-  const [nextPage, setNextPage] = useState<string | null>("");
-  const [loading2, setLoading2] = useState(false);
-
-  const elementRef = useRef(null);
-
-  async function fetchMoreItems() {
-    setLoading2(true);
-
-    if (!nextPage) {
-      setLoading2(false);
-      return;
-    }
-
-    if (nextPage) {
-      const res = await fetch(nextPage, options);
-      const json: CuratedPhotosData = await res.json();
-      setPhotosData((prevPhotos) => [...prevPhotos, ...json.photos]);
-      setNextPage(json.next_page);
-      setLoading2(false);
-    }
+  if (loading && !photosData) {
+    return <div>...loading</div>;
   }
 
-  function onIntersection(entries: any[]) {
-    const firstEntry = entries[0];
-
-    if (firstEntry.isIntersecting && nextPage) {
-      fetchMoreItems();
-    }
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(onIntersection, {
-      root: null,
-      rootMargin: "0px",
-      threshold: 1.0
-    });
-
-    if (observer && elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => {
-      if (observer) {
-        observer.disconnect();
-      }
-    }
-
-  }, [photosData]);
-
-  useEffect(() => {
-    if (data) {
-      setPhotosData(data.photos);
-      setNextPage(data.next_page);
-    }
-  }, [data]);
-
-  // if (loading && !photosData) {
-  //   return <div>...loading ...loading ...loading</div>;
-  // }
-  //
-  // if (error) {
-  //   return <div>Error: {error}</div>;
-  // }
-  //
-  // if (!data) {
-  //   return <div>no data!</div>;
-  // }
+  if (!photosData) {
+    return <div>no data!</div>;
+  }
 
   return (
     <PhotosContainer>
       {photosData.map((photo, index) => (
-        <FavoritePhotoItem photo={photo} key={index} />
+        <PhotoItem photo={photo} key={index} />
       ))}
-      {loading2 && <div>...loading ...loading ...loading</div>}
+      {error && <div>Error: failed to load photos</div>}
+      {loading && <div>...loading</div>}
       <div ref={elementRef}></div>
     </PhotosContainer>
   );

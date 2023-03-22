@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-export function useFetch<T>(_url: string, _options?: RequestInit, _fetchOnLoad: boolean = false, _log: boolean = false) {
+export async function useFetch<T>(_url: string, _options?: RequestInit, _fetchOnLoad: boolean = false, _log: boolean = false) {
   const [data, setData] = useState<null | T>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | any>(null);
@@ -36,5 +36,11 @@ export function useFetch<T>(_url: string, _options?: RequestInit, _fetchOnLoad: 
     }
   }, []);
 
-  return {data, loading, error, reFetch, clearData};
+  return {
+    data,
+    loading,
+    error,
+    reFetch,
+    clearData
+  };
 }

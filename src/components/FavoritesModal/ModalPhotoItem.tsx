@@ -1,17 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { Photo } from "../Photos/PhotosCuratedList";
-import { useFavorites } from "../../hooks/useFavorites";
 import { Flex } from "../common/Layout/Flex";
-import {
-  Backdrop,
-  Divider,
-  FavoriteButton,
-  Image,
-  ImageContainer,
-  PhotoAuthor,
-  Title
-} from "../Photos/ImageItemStyles";
-import { extractStringFromUrl } from "../../helpers/helpers";
+import { Backdrop, Divider, FavoriteButton, Image, PhotoAuthor, PhotoCard, Title } from "../Photos/ImageItemStyles";
+import { Fade } from "../common/Transitions/Fade";
+import { usePhotoItem } from "../Photos/usePhotoItem";
 
 interface ModalPhotoItemProps {
   photo: Photo,
@@ -19,14 +11,7 @@ interface ModalPhotoItemProps {
 }
 
 const ModalPhotoItem: React.FC<ModalPhotoItemProps> = ({photo, removePhotoItem}) => {
-  const {removeFromFavoritesById} = useFavorites();
-  const [showDetails, setShowDetails] = useState(false);
-  const [photoTitle, setPhotoTitle] = useState<string>("");
-
-  useEffect(() => {
-    const titleFromUrl = extractStringFromUrl(photo.url, "photo/", "-");
-    setPhotoTitle(titleFromUrl);
-  }, [photo]);
+  const { showDetails, setShowDetails, photoTitle } = usePhotoItem(photo);
 
   function renderOnHover() {
     return (
@@ -49,10 +34,12 @@ const ModalPhotoItem: React.FC<ModalPhotoItemProps> = ({photo, removePhotoItem})
 
   return (
     <>
-      <ImageContainer onPointerEnter={() => setShowDetails(true)} onPointerLeave={() => setShowDetails(false)}>
+      <PhotoCard shadow={"primary"} onPointerEnter={() => setShowDetails(true)} onPointerLeave={() => setShowDetails(false)}>
         <Image alt={photo.alt} src={photo.src.large}/>
-        {showDetails && renderOnHover()}
-      </ImageContainer>
+        <Fade show={showDetails}>
+          {renderOnHover()}
+        </Fade>
+      </PhotoCard>
     </>
 
   );
