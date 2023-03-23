@@ -30,14 +30,11 @@ export const Image = styled('img')({
 
 export const FavoriteButton = styled('button')({
   zIndex: 2,
-  top: "50%",
-  left: "50%",
   cursor: "pointer",
   borderRadius: "36px",
   padding: "20px 20px 14px 20px",
   backgroundColor: "rgba(0,0,0,0)",
   color: "white",
-  fontWeight: "bold",
   fontSize: "1.4rem",
   border: "solid white 1px",
   marginBottom: "auto"
@@ -63,13 +60,14 @@ export const Title = styled('text')({
   textAlign: "center"
 });
 
-export const Divider = styled('hr')({
-  borderTop: "2px solid white",
-  width: "100px"
-});
-
 export const PhotoAuthor = styled('text')({
   color: "white",
   fontSize: "1.6rem",
-  textAlign: "center"
+  textAlign: "center",
+  fontStyle: "italic"
+});
+
+export const Divider = styled('hr')({
+  borderTop: "2px solid white",
+  width: "100px"
 });

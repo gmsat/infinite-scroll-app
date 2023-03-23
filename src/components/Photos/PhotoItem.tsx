@@ -15,34 +15,6 @@ interface PhotoItemProps {
 }
 
 const PhotoItem: React.FC<PhotoItemProps> = ({photo}) => {
-  // const {addToFavorites, photoInFavorites, removeFromFavoritesById} = useFavorites();
-  // const [showDetails, setShowDetails] = useState(false);
-  // const [photoTitle, setPhotoTitle] = useState<string>("");
-  // const [favoriteButtonState, setFavoriteButtonState] = useState(false);
-  //
-  // const handleAddToFavorites = (photo: Photo) => {
-  //   if (photoInFavorites(photo)) {
-  //     return;
-  //   }
-  //
-  //   addToFavorites(photo);
-  //   setFavoriteButtonState(photoInFavorites(photo));
-  // }
-  //
-  // const handleRemoveFromFavorites = (photo: Photo) => {
-  //   removeFromFavoritesById(photo);
-  //   setFavoriteButtonState(photoInFavorites(photo));
-  // }
-  //
-  // useEffect(() => {
-  //   const titleFromUrl = extractStringFromUrl(photo.url, "photo/", "-");
-  //   setPhotoTitle(titleFromUrl);
-  // }, []);
-  //
-  // useEffect(() => {
-  //   setFavoriteButtonState(photoInFavorites(photo));
-  // }, [showDetails]);
-
   const {
     handleRemoveFromFavorites,
     handleAddToFavorites,
@@ -74,7 +46,7 @@ const PhotoItem: React.FC<PhotoItemProps> = ({photo}) => {
   return (
     <>
       <PhotoCard shadow={"primary"} onPointerEnter={() => setShowDetails(true)} onPointerLeave={() => setShowDetails(false)}>
-        <Image alt={photo.alt} src={photo.src.large}/>
+        <Image loading={"lazy"} alt={photo.alt} src={photo.src.large}/>
         <Fade show={showDetails}>
           {renderOnHover()}
         </Fade>

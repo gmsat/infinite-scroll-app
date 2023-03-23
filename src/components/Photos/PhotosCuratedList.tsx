@@ -29,10 +29,10 @@ export interface Photo {
   alt: string
 }
 
-export type CuratedPhotosData<T> = {
+export type CuratedPhotosData = {
   page: number,
   per_page: number,
-  photos: Photo[] | T,
+  photos: Photo[],
   next_page: string
 }
 
@@ -73,6 +73,7 @@ const PhotosContainer = styled.div({
   justifyContent: "center",
   alignItems: "center",
   flexWrap: "wrap",
+  marginTop: "40px",
   gap: 36
 });
 

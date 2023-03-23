@@ -1,7 +1,7 @@
 import React, { MouseEventHandler, ReactNode } from 'react';
 import styled from "@emotion/styled";
-import { createPortal } from "react-dom";
 import { Flex } from "../Layout/Flex";
+import Portal from "../Utility/Portal";
 
 interface ModalContainerProps {
   backdropFilter?: string
@@ -85,7 +85,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({children, onClose, open, title, backdropFilter}) => {
   function renderModal() {
     return (
-      <>
+      <Portal container={document.body}>
         <ModalContainer backdropFilter={backdropFilter}>
           <ModalBox>
             <Flex style={{justifyContent: "flex-end", padding: 4}}>
@@ -98,13 +98,13 @@ const Modal: React.FC<ModalProps> = ({children, onClose, open, title, backdropFi
             </ModalContent>
           </ModalBox>
         </ModalContainer>
-      </>
+      </Portal>
     )
   }
 
   return (
     <>
-      {open ? createPortal(renderModal(), document.body) : null}
+      {open ? renderModal() : null}
     </>
   );
 };

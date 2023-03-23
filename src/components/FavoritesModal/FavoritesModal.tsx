@@ -32,12 +32,16 @@ const photoItem = {
 }
 
 const BigText = styled('div')({
-  fontFamily: "monospace",
   fontSize: "3.4rem",
   textAlign: "center"
 });
 
-const FavoritesModal = ({open, onClose}: {open: boolean, onClose: MouseEventHandler<HTMLDivElement>}) => {
+interface FavoritesModalProps {
+  open: boolean,
+  onClose: MouseEventHandler<HTMLDivElement>
+}
+
+const FavoritesModal: React.FC<FavoritesModalProps> = ({open, onClose}) => {
   const {getFavorites, clearFavorites, setAllFavoriteKeyItems} = useFavorites<Photo>('favorites');
   const [favorites, setFavorites] = useState(getFavorites());
 
