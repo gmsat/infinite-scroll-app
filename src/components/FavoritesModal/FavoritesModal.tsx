@@ -42,8 +42,8 @@ interface FavoritesModalProps {
 }
 
 const FavoritesModal: React.FC<FavoritesModalProps> = ({open, onClose}) => {
-  const {getFavorites, clearFavorites, setAllFavoriteKeyItems} = useFavorites<Photo>('favorites');
-  const [favorites, setFavorites] = useState(getFavorites());
+  const {getFavorites, clearFavorites, setAllFavoriteKeyItems} = useFavorites('favorites');
+  const [favorites, setFavorites] = useState<Photo[]>(getFavorites());
 
   const removeFromFavorites = (photo: Photo) => {
     const p = favorites.find((p) => p.id === photo.id);

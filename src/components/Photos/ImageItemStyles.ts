@@ -7,7 +7,7 @@ interface CardProps {
 }
 
 export const Card = styled('div')<CardProps>({
-  position: "relative"
+  position: "static"
 }, props => ({
   boxShadow:
     props.shadow === "primary" ? theme.shadows.primary :
@@ -15,10 +15,12 @@ export const Card = styled('div')<CardProps>({
 }));
 
 export const PhotoCard = styled(Card)({
-  maxHeight: "300px",
+  // width: "25%",
   width: "400px",
-  overflow: "hidden",
-  borderRadius: "8px"
+  maxHeight: "300px",
+  overflow: "clip",
+  borderRadius: "8px",
+  position: "relative"
 });
 
 export const Image = styled('img')({
@@ -29,10 +31,10 @@ export const Image = styled('img')({
 });
 
 export const FavoriteButton = styled('button')({
-  zIndex: 2,
+  // zIndex: 2,
   cursor: "pointer",
   borderRadius: "36px",
-  padding: "20px 20px 14px 20px",
+  padding: "16px 24px 14px 24px",
   backgroundColor: "rgba(0,0,0,0)",
   color: "white",
   fontSize: "1.4rem",
@@ -48,7 +50,6 @@ export const Backdrop = styled('div')({
   width: "100%",
   height: "100%",
   top: "0",
-  gap: 4,
   position: "absolute",
   backgroundColor: "rgba(0,0,0,0.4)"
 });

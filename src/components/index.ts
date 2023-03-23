@@ -4,11 +4,13 @@ import FavoritesModal from "./FavoritesModal/FavoritesModal";
 import ModalPhotoItem from "./FavoritesModal/ModalPhotoItem";
 import { Flex } from "./common/Layout/Flex";
 import { Button } from "./common/Button/Button";
+import { Toolbar } from "./Toolbar/Toolbar";
 
 export {
   PhotosCuratedList,
   PhotoItem,
   FavoritesModal,
   ModalPhotoItem,
-  Flex, Button
+  Flex, Button,
+  Toolbar
 }

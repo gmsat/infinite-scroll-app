@@ -1,13 +1,8 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React from 'react';
 import { Photo } from "./PhotosCuratedList";
-import styled, { CSSObject } from "@emotion/styled";
-import { useFavorites } from "../../hooks/useFavorites";
-import { extractStringFromUrl } from "../../helpers/helpers";
 import { Flex } from "../common/Layout/Flex";
-import { theme } from "../../assets/themes/theme";
-import { Card, Image, PhotoAuthor, Title, Backdrop, Divider, FavoriteButton } from "./ImageItemStyles";
+import { Backdrop, Divider, FavoriteButton, Image, PhotoAuthor, PhotoCard, Title } from "./ImageItemStyles";
 import { Fade } from "../common/Transitions/Fade";
-import { PhotoCard } from "./ImageItemStyles";
 import { usePhotoItem } from "./usePhotoItem";
 
 interface PhotoItemProps {
@@ -22,10 +17,10 @@ const PhotoItem: React.FC<PhotoItemProps> = ({photo}) => {
     photoTitle,
     favoriteButtonState } = usePhotoItem(photo);
 
-  function renderOnHover() {
+  function renderPhotoDetails() {
     return (
       <Backdrop>
-        <Flex flexDirection={"column"} style={{position: "absolute", gap: 10, bottom: 0, paddingBottom: 24}}>
+        <Flex flexDirection={"column"} style={{justifyContent: "flex-end", height: "100%", gap: 10, bottom: 0, paddingBottom: 24}}>
           <Flex flexDirection={"column"} padding={"20px"}>
             <Title>{photoTitle}</Title>
             <Divider/>
@@ -34,8 +29,8 @@ const PhotoItem: React.FC<PhotoItemProps> = ({photo}) => {
           <Flex>
             {
               !favoriteButtonState
-                ? <FavoriteButton onClick={() => handleAddToFavorites(photo)}>Favourite</FavoriteButton>
-                : <FavoriteButton onClick={() => handleRemoveFromFavorites(photo)}>Un-Favourite</FavoriteButton>
+                ? <FavoriteButton onClick={() => handleAddToFavorites(photo)}>Favorite</FavoriteButton>
+                : <FavoriteButton onClick={() => handleRemoveFromFavorites(photo)}>Un-favorite</FavoriteButton>
             }
           </Flex>
         </Flex>
@@ -48,7 +43,7 @@ const PhotoItem: React.FC<PhotoItemProps> = ({photo}) => {
       <PhotoCard shadow={"primary"} onPointerEnter={() => setShowDetails(true)} onPointerLeave={() => setShowDetails(false)}>
         <Image loading={"lazy"} alt={photo.alt} src={photo.src.large}/>
         <Fade show={showDetails}>
-          {renderOnHover()}
+          {renderPhotoDetails()}
         </Fade>
       </PhotoCard>
     </>

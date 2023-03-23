@@ -32,7 +32,8 @@ export const ModalContainer = styled('div')<ModalContainerProps>({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  backdropFilter: "brightness(40%) blur(12px)"
+  backdropFilter: "brightness(40%) blur(12px)",
+  zIndex: 1000000
 }, props => ({
   backdropFilter: props.backdropFilter
 }));

@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import { Photo } from "./PhotosCuratedList";
 
-interface ApiResult<T> {
-  photosData: T[],
+interface ApiResult {
+  photosData: Photo[],
   loading: boolean,
   error: any,
   elementRef: any
 }
 
-export const useInfinitePhotos = <T>(url: string, options?: RequestInit): ApiResult<T> => {
-  const [photosData, setPhotosData] = useState<T[]>([]);
+export const useInfinitePhotos = <T>(url: string, options?: RequestInit): ApiResult => {
+  const [photosData, setPhotosData] = useState<Photo[]>([]);
   const [nextPage, setNextPage] = useState<string | null>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<null | any>(null);

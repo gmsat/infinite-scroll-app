@@ -66,7 +66,7 @@ const example = {
   "next_page": "https://api.pexels.com/v1/curated/?page=2&per_page=1"
 }
 
-const PhotosContainer = styled.div({
+const PhotosContainer = styled('div')({
   display: "flex",
   margin: "auto",
   flexDirection: "row",

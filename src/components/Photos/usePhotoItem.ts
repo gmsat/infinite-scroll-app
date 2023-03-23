@@ -4,7 +4,7 @@ import { Photo } from "./PhotosCuratedList";
 import { extractStringFromUrl } from "../../helpers/helpers";
 
 export const usePhotoItem = (photo: Photo) => {
-  const {addToFavorites, itemInFavorites, removeFromFavoritesById} = useFavorites<Photo>('favorites');
+  const {addToFavorites, itemInFavorites, removeFromFavoritesById} = useFavorites('favorites');
 
   const [showDetails, setShowDetails] = useState(false);
   const [photoTitle, setPhotoTitle] = useState<string>("");

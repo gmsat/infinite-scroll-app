@@ -1,5 +1,5 @@
-export const useFavorites = <T extends {id: string | number}>(storageKey: string) => {
-  const getFavorites = (): T[] => {
+export const useFavorites = (storageKey: string) => {
+  const getFavorites = () => {
     const favoritesJson = localStorage.getItem(storageKey);
 
     if (favoritesJson) {
@@ -9,8 +9,8 @@ export const useFavorites = <T extends {id: string | number}>(storageKey: string
     return [];
   }
 
-  const itemInFavorites = (item: T): boolean => {
-    const favorites = getFavorites();
+  const itemInFavorites = (item: any): boolean => {
+    const favorites: any[] = getFavorites();
     const photoExists = favorites.find((i) => i.id === item.id);
 
     if (photoExists) {
@@ -20,14 +20,14 @@ export const useFavorites = <T extends {id: string | number}>(storageKey: string
     return false;
   }
 
-  const addToFavorites = (item: T) => {
+  const addToFavorites = (item: any) => {
     const favorites = getFavorites();
     favorites.push(item);
     localStorage.setItem(storageKey, JSON.stringify(favorites));
   }
 
-  const removeFromFavoritesById = (item: T) => {
-    const favorites = getFavorites();
+  const removeFromFavoritesById = (item: any) => {
+    const favorites: any[] = getFavorites();
     const photoExists = favorites.find((i) => i.id === item.id);
 
     if (photoExists) {
@@ -40,7 +40,7 @@ export const useFavorites = <T extends {id: string | number}>(storageKey: string
     localStorage.removeItem(storageKey);
   }
 
-  const setAllFavoriteKeyItems = (items: T[]) => {
+  const setAllFavoriteKeyItems = (items: any[]) => {
     localStorage.setItem(storageKey, JSON.stringify(items));
   }
 

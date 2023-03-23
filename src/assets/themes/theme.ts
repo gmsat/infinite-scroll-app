@@ -1,4 +1,4 @@
-interface ThemeProps {
+export interface ThemeProps {
   colors: {
     primary: string,
     secondary: string
@@ -14,6 +14,7 @@ interface ThemeProps {
   shadows: {
     primary: string,
     secondary: string,
+    special: string,
     button: {
       default: string,
       hover: string
@@ -33,7 +34,7 @@ interface ThemeProps {
 export const theme: ThemeProps = {
   colors: {
     primary: "#90ADC6",
-    secondary: "green"
+    secondary: "#000000",
   },
   spacing: {
     padding: {
@@ -46,6 +47,7 @@ export const theme: ThemeProps = {
   shadows: {
     primary: "3px 3px 0px 0px rgba(0,0,0,0.1)",
     secondary: "3px 3px 3px 0px rgba(0,0,0,0.4)",
+    special: "2px 2px 120px 0px rgba(0,0,0,0.4)",
     button: {
       default: "1px 1px 2px 0px rgba(0,0,0,0.1)",
       hover: "1px 1px 2px 0px rgba(0,0,0,0.2)"

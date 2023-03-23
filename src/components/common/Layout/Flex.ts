@@ -4,7 +4,8 @@ interface FlexStyledProps {
   flexDirection?: "column" | "row",
   padding?: string | number,
   margin?: string | number,
-  gap?: number | string
+  gap?: number | string,
+  position?: string
 }
 
 export const Flex = styled('div')<FlexStyledProps>({
