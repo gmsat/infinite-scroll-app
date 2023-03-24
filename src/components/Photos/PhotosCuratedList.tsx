@@ -5,6 +5,8 @@ import styled from "@emotion/styled";
 import { useInfinitePhotos } from "./useInfinitePhotos";
 import { Loader } from "../index";
 import { inlineSizeContainer } from "../common/Modal/Modal";
+import { css } from "@emotion/react";
+import { theme } from "../../assets/themes/theme";
 
 export type PhotoSrc = {
   original: string,
@@ -68,17 +70,33 @@ const example = {
   "next_page": "https://api.pexels.com/v1/curated/?page=2&per_page=1"
 }
 
-const PhotosContainer = styled('div')({
-  display: "flex",
-  margin: "auto",
-  flexDirection: "row",
-  justifyContent: "center",
-  alignItems: "center",
-  flexWrap: "wrap",
-  marginTop: "40px",
-  gap: 36,
-  width: "100%"
-});
+export const PhotosContainer = styled('div')`
+  display: inline-flex;
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  margin: 60px auto;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  height: auto;
+  container-type: inline-size;
+  
+  @container ${theme.breakpoints.device.mobile} {
+    >* { flex: 0 0 90%; }
+  }
+  @container ${theme.breakpoints.device.tablet} {
+    >* { flex: 0 0 40%; }
+  }
+  @container ${theme.breakpoints.device.laptop} {
+    >* { flex: 0 0 30%; }
+  }
+  @container ${theme.breakpoints.device.desktop} {
+    >* { flex: 0 0 30%; }
+  }
+  @container ${theme.breakpoints.device.desktopXl} {
+    >* { flex: 0 0 20%; }
+  }
+`
 
 const PhotosCuratedList = () => {
   const API_KEY = import.meta.env.VITE_PEXELS_API_KEY;
@@ -106,7 +124,7 @@ const PhotosCuratedList = () => {
 
   return (
     <>
-      <PhotosContainer css={inlineSizeContainer}>
+      <PhotosContainer>
         {photosData && photosData.map((photo, index) => (
           <PhotoItem photo={photo} key={index} />
         ))}

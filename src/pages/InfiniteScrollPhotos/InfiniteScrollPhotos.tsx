@@ -28,7 +28,7 @@ const InfiniteScrollPhotos = () => {
         </Flex>
       </Toolbar>
       <FavoritesModal open={modalOpen} onClose={handleOpenModal}/>
-      <Flex style={{width: "100%", margin: "auto"}}>
+      <Flex>
         <PhotosCuratedList/>
       </Flex>
     </>

@@ -8,6 +8,7 @@ import Modal from "../common/Modal/Modal";
 import { Flex } from "../index";
 import { Fade } from "../common/Transitions/Fade";
 import { inlineSizeContainer } from "../common/Modal/Modal";
+import { PhotosContainer } from "../Photos/PhotosCuratedList";
 
 const photoItem = {
   "id": 2880507,
@@ -63,11 +64,11 @@ const FavoritesModal: React.FC<FavoritesModalProps> = ({open, onClose}) => {
 
   function renderFavorites() {
     return (
-      <Flex css={inlineSizeContainer} style={{width: "100%", flexDirection: "row", flexWrap: "wrap", gap: 36, margin: "auto", justifyContent: "center", alignItems: "center", marginTop: 32}}>
+      <PhotosContainer>
         {favorites.map((p, index) => (
           <ModalPhotoItem key={index} photo={p} removePhotoItem={() => removeFromFavorites(p)}/>
         ))}
-      </Flex>
+      </PhotosContainer>
     )
   }
 

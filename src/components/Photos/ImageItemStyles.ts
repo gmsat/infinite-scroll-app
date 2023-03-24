@@ -14,87 +14,20 @@ export const Card = styled('div')<CardProps>({
     props.shadow === "secondary" ? theme.shadows.secondary : "none"
 }));
 
-// original
-// export const PhotoCard = styled(Card)({
-//   // width: "25%",
-//   // width: "400px",
-//   width: "400px",
-//   maxHeight: "300px",
-//   overflow: "clip",
-//   borderRadius: "8px",
-//   position: "relative"
-// });
-//
-// export const Image = styled('img')({
-//   backgroundColor: "rgba(0,0,0,0.1)",
-//   width: "100%",
-//   height: "auto",
-//   maxHeight: "300px",
-//   objectFit: "cover"
-// });
-
-// aspect ratio
-// export const PhotoCard = styled(Card)({
-//   width: "100%",
-//   // aspectRatio: "6 / 4",
-//   aspectRatio: "40 / 29",
-//   overflow: "clip",
-//   borderRadius: "8px",
-//   position: "relative",
-//   // display: "flex",
-//   // justifyContent: "center",
-//   // alignItems: "center"
-// });
-//
-// export const Image = styled('img')({
-//   backgroundColor: "rgba(0,0,0,0.1)",
-//   width: "100%",
-//   height: "auto",
-//   objectFit: "cover",
-//   position: "absolute",
-//   top: "-50%"
-// });
-
-// aspect ratio 2
-// export const PhotoCard = styled(Card)({
-//   width: "20%",
-//   aspectRatio: "4 / 3",
-//   overflow: "clip",
-//   borderRadius: "8px",
-//   position: "relative"
-// });
-
 export const PhotoCard = styled(Card)`
-  width: 20%;
+  width: 100%;
   aspect-ratio: 4 / 3;
   overflow: clip;
   border-radius: 8px;
   position: relative;
-
-  @container ${theme.breakpoints.device.mobile} {
-    width: 90%
-  }
-  @container ${theme.breakpoints.device.tablet} {
-    width: 40%
-  }
-  @container ${theme.breakpoints.device.laptop} {
-    width: 30%
-  }
-  @container ${theme.breakpoints.device.desktop} {
-    width: 30%
-  }
-  @container ${theme.breakpoints.device.desktopXl} {
-    width: 22%
-  }
 `
 
 export const Image = styled('img')({
   backgroundColor: "rgba(0,0,0,0.1)",
   width: "100%",
-  height: "auto",
+  height: "100%",
   objectFit: "cover",
-  position: "relative",
-  top: "-50%"
+  position: "absolute"
 });
 
 const ButtonResponsive = styled('button')`
@@ -148,19 +81,19 @@ export const Backdrop = styled('div')({
 // });
 
 const ResponsiveTextSize = styled('text')`
-  @media ${theme.breakpoints.device.mobile} {
+  @container ${theme.breakpoints.device.mobile} {
     font-size: ${theme.breakpoints.fontSize.mobile}
   }
-  @media ${theme.breakpoints.device.tablet} {
+  @container ${theme.breakpoints.device.tablet} {
     font-size: ${theme.breakpoints.fontSize.tablet}
   }
-  @media ${theme.breakpoints.device.laptop} {
+  @container ${theme.breakpoints.device.laptop} {
     font-size: ${theme.breakpoints.fontSize.laptop}
   }
-  @media ${theme.breakpoints.device.desktop} {
+  @container ${theme.breakpoints.device.desktop} {
     font-size: ${theme.breakpoints.fontSize.desktop}
   }
-  @media ${theme.breakpoints.device.desktopXl} {
+  @container ${theme.breakpoints.device.desktopXl} {
     font-size: ${theme.breakpoints.fontSize.desktopXl}
   }
 `
