@@ -5,6 +5,7 @@ import ModalPhotoItem from "./FavoritesModal/ModalPhotoItem";
 import { Flex } from "./common/Layout/Flex";
 import { Button } from "./common/Button/Button";
 import { Toolbar } from "./Toolbar/Toolbar";
+import Loader from "./Progress/Loader";
 
 export {
   PhotosCuratedList,
@@ -12,5 +13,5 @@ export {
   FavoritesModal,
   ModalPhotoItem,
   Flex, Button,
-  Toolbar
+  Toolbar, Loader
 }

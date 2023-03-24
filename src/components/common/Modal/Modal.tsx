@@ -2,10 +2,15 @@ import React, { MouseEventHandler, ReactNode } from 'react';
 import styled from "@emotion/styled";
 import { Flex } from "../Layout/Flex";
 import Portal from "../Utility/Portal";
+import { css } from "@emotion/react";
 
 interface ModalContainerProps {
   backdropFilter?: string
 }
+
+export const inlineSizeContainer = css`
+  container-type: inline-size;
+`
 
 export const ModalBox = styled('div')({
   position: "relative",

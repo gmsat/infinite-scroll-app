@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useFetch } from "../../hooks/useFetch";
-import { PhotoItem } from "../index";
+import { Flex, PhotoItem } from "../index";
 import styled from "@emotion/styled";
 import { useInfinitePhotos } from "./useInfinitePhotos";
+import { Loader } from "../index";
+import { inlineSizeContainer } from "../common/Modal/Modal";
 
 export type PhotoSrc = {
   original: string,
@@ -74,7 +76,8 @@ const PhotosContainer = styled('div')({
   alignItems: "center",
   flexWrap: "wrap",
   marginTop: "40px",
-  gap: 36
+  gap: 36,
+  width: "100%"
 });
 
 const PhotosCuratedList = () => {
@@ -90,7 +93,7 @@ const PhotosCuratedList = () => {
   const {photosData, loading, error, elementRef} = useInfinitePhotos<Photo>(url, options);
 
   if (loading && !photosData) {
-    return <div>...loading</div>;
+    return <Loader/>;
   }
 
   if (error) {
@@ -102,14 +105,16 @@ const PhotosCuratedList = () => {
   }
 
   return (
-    <PhotosContainer>
-      {photosData.map((photo, index) => (
-        <PhotoItem photo={photo} key={index} />
-      ))}
-      {error && <div>Error: failed to load photos</div>}
-      {loading && <div>...loading</div>}
-      <div ref={elementRef}></div>
-    </PhotosContainer>
+    <>
+      <PhotosContainer css={inlineSizeContainer}>
+        {photosData && photosData.map((photo, index) => (
+          <PhotoItem photo={photo} key={index} />
+        ))}
+        {error && <div>Error: failed to load photos</div>}
+        <div ref={elementRef}></div>
+      </PhotosContainer>
+      {loading && <Loader/>}
+    </>
   );
 };
 

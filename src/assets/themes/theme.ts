@@ -21,14 +21,47 @@ export interface ThemeProps {
     }
   },
   breakpoints: {
-    sm: string,
-    md: string,
-    lg: string,
-    xl: string
+    device: {
+      mobile: string,
+      tablet: string,
+      laptop: string,
+      desktop: string,
+      desktopXl: string
+    },
+    container: {
+      mobile: string,
+      tablet: string,
+      laptop: string,
+      desktop: string,
+      desktopXl: string
+    },
+    fontSize: {
+      mobile: string,
+      tablet: string,
+      laptop: string,
+      desktop: string,
+      desktopXl: string
+    }
   },
   fonts: {
     family: string
   }
+}
+
+// const breakpointSize = {
+//   xs: "0px",
+//   sm: "768px",
+//   md: "900px",
+//   lg: "1200px",
+//   xl: "1563px"
+// }
+
+const breakpointSize = {
+  xs: "0px",
+  sm: "768px",
+  md: "1024px",
+  lg: "1280px",
+  xl: "1536px"
 }
 
 export const theme: ThemeProps = {
@@ -54,10 +87,27 @@ export const theme: ThemeProps = {
     }
   },
   breakpoints: {
-    sm: "",
-    md: "",
-    lg: "",
-    xl: ""
+    device: {
+      mobile: `(max-width: ${breakpointSize.sm})`,
+      tablet: `(min-width: ${breakpointSize.sm}) and (max-width: ${breakpointSize.md})`,
+      laptop: `(min-width: ${breakpointSize.md}) and (max-width: ${breakpointSize.lg})`,
+      desktop: `(min-width: ${breakpointSize.lg}) and (max-width: ${breakpointSize.xl})`,
+      desktopXl: `(min-width: ${breakpointSize.xl})`
+    },
+    container: {
+      mobile: `(max-width: ${breakpointSize.sm})`,
+      tablet: `(min-width: ${breakpointSize.sm}) and (max-width: ${breakpointSize.md})`,
+      laptop: `(min-width: ${breakpointSize.md}) and (max-width: ${breakpointSize.lg})`,
+      desktop: `(min-width: ${breakpointSize.lg}) and (max-width: ${breakpointSize.xl})`,
+      desktopXl: `(min-width: ${breakpointSize.xl})`
+    },
+    fontSize: {
+      mobile: "1.5rem",
+      tablet: "1.1rem",
+      laptop: "1.3rem",
+      desktop: "1.4rem",
+      desktopXl: "1.5rem"
+    }
   },
   fonts: {
     family: "Roboto Condensed"

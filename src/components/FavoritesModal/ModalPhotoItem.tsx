@@ -17,14 +17,14 @@ const ModalPhotoItem: React.FC<ModalPhotoItemProps> = ({photo, removePhotoItem})
     return (
       <>
         <Backdrop>
-          <Flex flexDirection={"column"} style={{justifyContent: "flex-end", height: "100%", gap: 10, bottom: 0, paddingBottom: 24}}>
-            <Flex flexDirection={"column"} padding={"20px"}>
+          <Flex flexDirection={"column"} style={{justifyContent: "flex-end", height: "100%", gap: 10}}>
+            <Flex flexDirection={"column"} style={{height: "100%", position: "absolute"}}>
               <Title>{photoTitle}</Title>
               <Divider/>
               <PhotoAuthor>{photo.photographer}</PhotoAuthor>
             </Flex>
-            <Flex>
-               <FavoriteButton onClick={() => removePhotoItem(photo)}>Un-favorite</FavoriteButton>
+            <Flex style={{position: "absolute", bottom: 22}}>
+               <FavoriteButton style={{paddingTop: 10, paddingBottom: 8, paddingLeft: 14, paddingRight: 14}} onClick={() => removePhotoItem(photo)}>Un-favorite</FavoriteButton>
             </Flex>
           </Flex>
         </Backdrop>

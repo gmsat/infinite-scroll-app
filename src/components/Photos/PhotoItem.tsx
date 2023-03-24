@@ -20,13 +20,13 @@ const PhotoItem: React.FC<PhotoItemProps> = ({photo}) => {
   function renderPhotoDetails() {
     return (
       <Backdrop>
-        <Flex flexDirection={"column"} style={{justifyContent: "flex-end", height: "100%", gap: 10, bottom: 0, paddingBottom: 24}}>
-          <Flex flexDirection={"column"} padding={"20px"}>
+        <Flex flexDirection={"column"} style={{justifyContent: "flex-end", height: "100%", gap: 10}}>
+          <Flex flexDirection={"column"} style={{height: "100%", position: "absolute"}}>
             <Title>{photoTitle}</Title>
             <Divider/>
             <PhotoAuthor>{photo.photographer}</PhotoAuthor>
           </Flex>
-          <Flex>
+          <Flex style={{position: "absolute", bottom: 28}}>
             {
               !favoriteButtonState
                 ? <FavoriteButton onClick={() => handleAddToFavorites(photo)}>Favorite</FavoriteButton>
@@ -41,7 +41,7 @@ const PhotoItem: React.FC<PhotoItemProps> = ({photo}) => {
   return (
     <>
       <PhotoCard shadow={"primary"} onPointerEnter={() => setShowDetails(true)} onPointerLeave={() => setShowDetails(false)}>
-        <Image loading={"lazy"} alt={photo.alt} src={photo.src.large}/>
+        <Image alt={photo.alt} src={photo.src.large}/>
         <Fade show={showDetails}>
           {renderPhotoDetails()}
         </Fade>

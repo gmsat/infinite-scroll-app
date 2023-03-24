@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import { Photo } from "./PhotosCuratedList";
+import loader from "../Progress/Loader";
 
 interface ApiResult {
   photosData: Photo[],
@@ -39,6 +40,8 @@ export const useInfinitePhotos = <T>(url: string, options?: RequestInit): ApiRes
     } catch (e) {
       setError(e);
       setLoading(false);
+
+      console.log("error", e);
     }
   }
 
@@ -64,6 +67,8 @@ export const useInfinitePhotos = <T>(url: string, options?: RequestInit): ApiRes
         setError(e);
         setLoading(false);
         setFetchingMore(false);
+
+        console.log("error", e);
       }
     }
   }
