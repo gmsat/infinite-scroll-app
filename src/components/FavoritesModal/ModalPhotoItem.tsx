@@ -36,7 +36,7 @@ const ModalPhotoItem: React.FC<ModalPhotoItemProps> = ({photo, removePhotoItem})
     <>
       <PhotoCard shadow={"primary"} onPointerEnter={() => setShowDetails(true)} onPointerLeave={() => setShowDetails(false)}>
         <Image alt={photo.alt} src={photo.src.large}/>
-        <Fade show={true}>
+        <Fade show={showDetails}>
           {renderPhotoDetails()}
         </Fade>
       </PhotoCard>
