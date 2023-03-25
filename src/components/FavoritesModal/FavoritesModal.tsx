@@ -9,6 +9,7 @@ import { Flex } from "../index";
 import { Fade } from "../common/Transitions/Fade";
 import { inlineSizeContainer } from "../common/Modal/Modal";
 import { PhotosContainer } from "../Photos/PhotosCuratedList";
+import { PhotosGrid } from "../Photos/PhotosCuratedList";
 
 const photoItem = {
   "id": 2880507,
@@ -65,9 +66,11 @@ const FavoritesModal: React.FC<FavoritesModalProps> = ({open, onClose}) => {
   function renderFavorites() {
     return (
       <PhotosContainer>
-        {favorites.map((p, index) => (
-          <ModalPhotoItem key={index} photo={p} removePhotoItem={() => removeFromFavorites(p)}/>
-        ))}
+        <PhotosGrid>
+          {favorites.map((p, index) => (
+            <ModalPhotoItem key={index} photo={p} removePhotoItem={() => removeFromFavorites(p)}/>
+          ))}
+        </PhotosGrid>
       </PhotosContainer>
     )
   }

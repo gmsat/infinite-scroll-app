@@ -31,32 +31,35 @@ export const Image = styled('img')({
 });
 
 const ButtonResponsive = styled('button')`
+  @media ${theme.breakpoints.device.mobileXs} {
+    font-size: 0.8rem;
+    margin-bottom: -10px;
+    padding: 8px;
+  }
   @media ${theme.breakpoints.device.mobile} {
     font-size: 1.5rem;
   }
   @media ${theme.breakpoints.device.tablet} {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
   @media ${theme.breakpoints.device.laptop} {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
   @media ${theme.breakpoints.device.desktop} {
     font-size: 1.4rem;
   }
   @media ${theme.breakpoints.device.desktopXl} {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 `
 
 export const FavoriteButton = styled(ButtonResponsive)({
-  // zIndex: 2,
   cursor: "pointer",
   borderRadius: "36px",
   padding: "12px 24px 10px 24px",
   backgroundColor: "rgba(0,0,0,0)",
   color: "white",
   fontFamily: "Roboto Condensed",
-  // fontSize: "1.4rem",
   border: "solid white 1px",
   marginBottom: "auto"
 });
@@ -81,20 +84,23 @@ export const Backdrop = styled('div')({
 // });
 
 const ResponsiveTextSize = styled('text')`
+  @container ${theme.breakpoints.device.mobileXs} {
+    font-size: 1.2rem
+  }
   @container ${theme.breakpoints.device.mobile} {
-    font-size: ${theme.breakpoints.fontSize.mobile}
+    font-size: 1.5rem
   }
   @container ${theme.breakpoints.device.tablet} {
-    font-size: ${theme.breakpoints.fontSize.tablet}
+    font-size: 1.1rem
   }
   @container ${theme.breakpoints.device.laptop} {
-    font-size: ${theme.breakpoints.fontSize.laptop}
+    font-size: 1.3rem
   }
   @container ${theme.breakpoints.device.desktop} {
-    font-size: ${theme.breakpoints.fontSize.desktop}
+    font-size: 1.4rem
   }
   @container ${theme.breakpoints.device.desktopXl} {
-    font-size: ${theme.breakpoints.fontSize.desktopXl}
+    font-size: 1.4rem
   }
 `
 

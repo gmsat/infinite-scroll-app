@@ -11,9 +11,9 @@ export const useFavorites = (storageKey: string) => {
 
   const itemInFavorites = (item: any): boolean => {
     const favorites: any[] = getFavorites();
-    const photoExists = favorites.find((i) => i.id === item.id);
+    const itemExists = favorites.find((i) => i.id === item.id);
 
-    if (photoExists) {
+    if (itemExists) {
       return true;
     }
 
@@ -28,9 +28,9 @@ export const useFavorites = (storageKey: string) => {
 
   const removeFromFavoritesById = (item: any) => {
     const favorites: any[] = getFavorites();
-    const photoExists = favorites.find((i) => i.id === item.id);
+    const itemExists = favorites.find((i) => i.id === item.id);
 
-    if (photoExists) {
+    if (itemExists) {
       const filtered = favorites.filter((i) => i.id !== item.id);
       localStorage.setItem(storageKey, JSON.stringify(filtered));
     }

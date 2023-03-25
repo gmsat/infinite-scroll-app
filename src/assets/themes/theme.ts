@@ -1,58 +1,15 @@
-export interface ThemeProps {
-  colors: {
-    primary: string,
-    secondary: string
-  },
-  spacing: {
-    padding:  {
-      sm: string,
-      md: string,
-      lg: string,
-      xl: string
-    }
-  },
-  shadows: {
-    primary: string,
-    secondary: string,
-    special: string,
-    button: {
-      default: string,
-      hover: string
-    }
-  },
-  breakpoints: {
-    device: {
-      mobile: string,
-      tablet: string,
-      laptop: string,
-      desktop: string,
-      desktopXl: string
-    },
-    fontSize: {
-      mobile: string,
-      tablet: string,
-      laptop: string,
-      desktop: string,
-      desktopXl: string
-    }
-  },
-  fonts: {
-    family: string
-  }
-}
-
 const breakpointSize = {
-  xs: "0px",
+  xs: "480px",
   sm: "768px",
   md: "1024px",
   lg: "1280px",
   xl: "1536px"
 }
 
-export const theme: ThemeProps = {
+export const theme = {
   colors: {
     primary: "#90ADC6",
-    secondary: "#000000",
+    secondary: "#000000"
   },
   spacing: {
     padding: {
@@ -73,7 +30,8 @@ export const theme: ThemeProps = {
   },
   breakpoints: {
     device: {
-      mobile: `(max-width: ${breakpointSize.sm})`,
+      mobileXs: `(max-width: ${breakpointSize.xs})`,
+      mobile: `(min-width: ${breakpointSize.xs}) and (max-width: ${breakpointSize.sm})`,
       tablet: `(min-width: ${breakpointSize.sm}) and (max-width: ${breakpointSize.md})`,
       laptop: `(min-width: ${breakpointSize.md}) and (max-width: ${breakpointSize.lg})`,
       desktop: `(min-width: ${breakpointSize.lg}) and (max-width: ${breakpointSize.xl})`,
@@ -84,7 +42,7 @@ export const theme: ThemeProps = {
       tablet: "1.1rem",
       laptop: "1.3rem",
       desktop: "1.4rem",
-      desktopXl: "1.5rem"
+      desktopXl: "1.4rem"
     }
   },
   fonts: {

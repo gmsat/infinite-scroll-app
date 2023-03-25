@@ -41,8 +41,8 @@ const PhotoItem: React.FC<PhotoItemProps> = ({photo}) => {
   return (
     <>
       <PhotoCard shadow={"primary"} onPointerEnter={() => setShowDetails(true)} onPointerLeave={() => setShowDetails(false)}>
-        <Image alt={photo.alt} src={photo.src.large}/>
-        <Fade show={showDetails}>
+        <Image loading={"lazy"} alt={photo.alt} src={photo.src.large}/>
+        <Fade show={true}>
           {renderPhotoDetails()}
         </Fade>
       </PhotoCard>
