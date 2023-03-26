@@ -1,17 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { FavoritesModal, Flex, PhotosCuratedList } from "../../components";
-import { Button } from "../../components";
-import styled from "@emotion/styled";
-import Portal from "../../components/common/Utility/Portal";
-import { Toolbar } from "../../components";
+import React, { useState } from 'react';
+import { FavoritesModal, PhotosCuratedList } from "../../components";
 import { theme } from "../../assets/themes/theme";
-
-const FloatingButtonStyle = styled(Button)({
-  position: "fixed",
-  top: 50,
-  right: 10,
-  width: "100px"
-});
+import { Button, Flex, Toolbar } from "../../components/common";
 
 const InfiniteScrollPhotos = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -28,7 +18,7 @@ const InfiniteScrollPhotos = () => {
         </Flex>
       </Toolbar>
       <FavoritesModal open={modalOpen} onClose={handleOpenModal}/>
-      <Flex>
+      <Flex style={{paddingLeft: "20px", paddingRight: "20px"}}>
         <PhotosCuratedList/>
       </Flex>
     </>

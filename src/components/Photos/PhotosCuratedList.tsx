@@ -71,7 +71,7 @@ export type CuratedPhotosData = {
   next_page: string
 }
 
-const PhotosCuratedList = () => {
+export const PhotosCuratedList = () => {
   const API_KEY = import.meta.env.VITE_PEXELS_API_KEY;
   const url = "https://api.pexels.com/v1/curated?per_page=12";
 
@@ -81,14 +81,19 @@ const PhotosCuratedList = () => {
     },
   };
 
-  const {photosData, loading, error, elementRef} = useInfinitePhotos<Photo>(url, options);
+  const {photosData, loading, error, elementRef} = useInfinitePhotos(url, options);
 
   if (loading && !photosData) {
     return <Loader/>;
   }
 
+
   if (error) {
-    return <div>Error: {error}</div>;
+    return(
+      <>
+        <div>Error: {error.message}</div>
+      </>
+    );
   }
 
   if (!photosData) {
@@ -99,10 +104,13 @@ const PhotosCuratedList = () => {
     <>
       <PhotosContainer>
         <PhotosGrid>
+
           {photosData && photosData.map((photo, index) => (
             <PhotoItem photo={photo} key={index} />
           ))}
-          {error && <div>Error: failed to load photos</div>}
+
+          {error && <div>Error: failed to load photos [${error.message}]</div>}
+
           <div ref={elementRef}></div>
         </PhotosGrid>
       </PhotosContainer>
@@ -110,5 +118,3 @@ const PhotosCuratedList = () => {
     </>
   );
 };
-
-export default PhotosCuratedList;

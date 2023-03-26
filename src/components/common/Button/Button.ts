@@ -6,13 +6,14 @@ interface ButtonProps {
 }
 
 export const Button = styled('button')<ButtonProps>({
+  backgroundColor: theme.colors.primary,
+  fontFamily: theme.fonts.primary,
+  boxShadow: theme.shadows.button.default,
   padding: "8px",
   borderRadius: "24px",
   border: "none",
-  backgroundColor: theme.colors.primary,
   color: "white",
   fontSize: "1rem",
-  boxShadow: theme.shadows.button.default,
   ':hover': {
     filter: "brightness(95%)",
     boxShadow: theme.shadows.button.hover,

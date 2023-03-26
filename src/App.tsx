@@ -1,5 +1,4 @@
 import { InfiniteScrollPhotos } from "./pages";
-import styled from "@emotion/styled";
 
 function App() {
   return (

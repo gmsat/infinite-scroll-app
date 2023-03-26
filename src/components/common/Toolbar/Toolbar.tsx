@@ -1,8 +1,6 @@
-import React from 'react';
-import { Flex } from "../common/Layout/Flex";
-import styled, { CSSObject } from "@emotion/styled";
-import { theme } from "../../assets/themes/theme";
-import { CSSProperties } from "react";
+import React, { CSSProperties } from 'react';
+import styled from "@emotion/styled";
+import { theme } from "../../../assets/themes/theme";
 
 interface ToolbarProps {
   position?: CSSProperties['position']

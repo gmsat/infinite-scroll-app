@@ -1,16 +1,11 @@
 import React, { MouseEventHandler, ReactNode } from 'react';
 import styled from "@emotion/styled";
 import { Flex } from "../Layout/Flex";
-import Portal from "../Utility/Portal";
-import { css } from "@emotion/react";
+import { Portal } from "../Utility/Portal";
 
 interface ModalContainerProps {
   backdropFilter?: string
 }
-
-export const inlineSizeContainer = css`
-  container-type: inline-size;
-`
 
 export const ModalBox = styled('div')({
   position: "relative",
@@ -49,7 +44,6 @@ const CloseButton = styled('div')({
   userSelect: "none",
   padding: 0,
   margin: 0,
-  textDecoration: "none",
   width: "50px",
   height: "50px",
   textAlign: "center",
@@ -72,9 +66,9 @@ const ModalTitle = styled('text')({
   fontWeight: "bold",
   flex: 1,
   marginLeft: 20
-})
+});
 
-const CloseModalButton = ({onClick}: {onClick: MouseEventHandler<HTMLDivElement>}) => {
+const CloseModalButton = ({onClick}: { onClick: MouseEventHandler<HTMLDivElement> }) => {
   return (
     <CloseButton onClick={onClick}>&#x2716;</CloseButton>
   )
@@ -88,7 +82,7 @@ interface ModalProps {
   onClose: MouseEventHandler<HTMLDivElement>,
 }
 
-const Modal: React.FC<ModalProps> = ({children, onClose, open, title, backdropFilter}) => {
+export const Modal: React.FC<ModalProps> = ({children, onClose, open, title, backdropFilter}) => {
   function renderModal() {
     return (
       <Portal container={document.body}>
@@ -114,5 +108,3 @@ const Modal: React.FC<ModalProps> = ({children, onClose, open, title, backdropFi
     </>
   );
 };
-
-export default Modal;

@@ -1,4 +1,6 @@
-const breakpointSize = {
+import { css } from "@emotion/react";
+
+export const breakpoint = {
   xs: "480px",
   sm: "768px",
   md: "1024px",
@@ -22,7 +24,7 @@ export const theme = {
   shadows: {
     primary: "3px 3px 0px 0px rgba(0,0,0,0.1)",
     secondary: "3px 3px 3px 0px rgba(0,0,0,0.4)",
-    special: "2px 2px 120px 0px rgba(0,0,0,0.4)",
+    special: "2px 2px 160px 0px rgba(0,0,0,0.4)",
     button: {
       default: "1px 1px 2px 0px rgba(0,0,0,0.1)",
       hover: "1px 1px 2px 0px rgba(0,0,0,0.2)"
@@ -30,12 +32,12 @@ export const theme = {
   },
   breakpoints: {
     device: {
-      mobileXs: `(max-width: ${breakpointSize.xs})`,
-      mobile: `(min-width: ${breakpointSize.xs}) and (max-width: ${breakpointSize.sm})`,
-      tablet: `(min-width: ${breakpointSize.sm}) and (max-width: ${breakpointSize.md})`,
-      laptop: `(min-width: ${breakpointSize.md}) and (max-width: ${breakpointSize.lg})`,
-      desktop: `(min-width: ${breakpointSize.lg}) and (max-width: ${breakpointSize.xl})`,
-      desktopXl: `(min-width: ${breakpointSize.xl})`
+      mobileXs: `(max-width: ${breakpoint.xs})`,
+      mobile: `(min-width: ${breakpoint.xs}) and (max-width: ${breakpoint.sm})`,
+      tablet: `(min-width: ${breakpoint.sm}) and (max-width: ${breakpoint.md})`,
+      laptop: `(min-width: ${breakpoint.md}) and (max-width: ${breakpoint.lg})`,
+      desktop: `(min-width: ${breakpoint.lg}) and (max-width: ${breakpoint.xl})`,
+      desktopXl: `(min-width: ${breakpoint.xl})`
     },
     fontSize: {
       mobile: "1.5rem",
@@ -46,6 +48,18 @@ export const theme = {
     }
   },
   fonts: {
-    family: "Roboto Condensed"
-  }
+    primary: "Roboto Condensed"
+  },
+  globalCss: css`
+    html {
+      font-family: "Roboto Condensed",monospace;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+    }
+  `
 }
+
+export const globalStyles = theme.globalCss;
